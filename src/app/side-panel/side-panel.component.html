@@ -1,0 +1,105 @@
+<div #myPanel class="rightSidePanel" style="width:{{ panelWidth }}">
+  <div class="captionPanel">
+    <div>
+      <!-- <img
+        src="https://www.pngall.com/wp-content/uploads/12/Left-Arrow-PNG-Images.png"
+        alt=""
+        height="20"
+        (click)="ClosePanel()"
+      /> -->
+      <i
+        style="font-size:26px"
+        class="fa fa-long-arrow-left"
+        aria-hidden="true"
+        (click)="ClosePanel()"
+      ></i>
+    </div>
+
+    <div class="caption">{{ sCaption }}</div>
+    <div class="flex" style="margin-left:auto">
+      <i
+        class="fa fa-list"
+        style="margin-right:25px"
+        aria-hidden="true"
+        (click)="setDisplayStyle(false)"
+      ></i>
+
+      <i
+        class="fa fa-calendar"
+        aria-hidden="true"
+        (click)="setDisplayStyle(true)"
+      ></i>
+
+      <div style="margin-left:25px">
+        <!-- <img
+          src="https://icons.veryicon.com/png/o/miscellaneous/eva/list-outline-1.png"
+          alt=""
+          width="30"
+          (click)="setDisplayStyle(false)"
+        /> -->
+      </div>
+
+      <!-- <button (click)="ClosePanel()" class="button">Close</button> -->
+      <i class="fa fa-sign-out" aria-hidden="true" (click)="ClosePanel()" ></i>
+    </div>
+  </div>
+  <div
+    style="background-color:lightgrey;padding:5px;height:40px;color:white;display:flex;align-items:center"
+  >
+    ข้อมูลที่เลือก :: {{ dataSelected }}
+    <button (click)="ClosePanel()" class="button">ตกลง</button>
+  </div>
+  <!-- Matrix Style Start -->
+
+  <div
+    *ngIf="ShowStyleMatrix"
+    style="display:flex; flex-wrap: wrap;justify-content:center;"
+  >
+    <div
+      class="thumbNail"
+      *ngFor="let result of dataResult"
+      id="{{ result.departmentCode }}"
+      (click)="setSeleced(result.departmentDesc, result.departmentCode, $event)"
+    >
+      <div
+        style="height:100px;overflow:hidden;border-bottom:1px solid lightgrey"
+      >
+        <img
+          src="{{ result.imageName }}"
+          alt=""
+          width="100px"
+          style="border-radius:6px"
+          class="myDIV"
+        />
+      </div>
+      <div style="padding:10px;font-size:16px;text-align:center">
+        {{ result.departmentDesc }}
+      </div>
+      <div class="hide">I am shown when someone hovers over the div above.</div>
+    </div>
+  </div>
+  <!-- End Style Matrix -->
+
+  <!-- List Style Start -->
+  <div *ngIf="!ShowStyleMatrix">
+    <div
+      class="styleList"
+      *ngFor="let result of dataResult"
+      id="{{ result.departmentCode }}"
+      (click)="setSeleced(result.departmentDesc, result.departmentCode, $event)"
+    >
+      <div style="width:100px">
+        <img
+          src="{{ result.imageName }}"
+          alt=""
+          height="40px"
+          style="border-radius:6px"
+          class="myDIV"
+        />
+      </div>
+
+      <div>{{ result.departmentDesc }}</div>
+    </div>
+  </div>
+  <!-- </div> End Main Container -->
+</div>
